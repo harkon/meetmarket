@@ -1,35 +1,70 @@
 {
-  "name": "OpenShift-Sample-App",
+  "name": "Shop101",
   "version": "1.0.0",
-  "description": "OpenShift Sample Application",
+  "description": "Online e-commerce platform for all!!!",
   "keywords": [
-    "OpenShift",
-    "Node.js",
-    "application",
-    "openshift"
+    "Facebook",
+    "Ordering system",
+    "E-Shop",
+    "Point Of Sales"
   ],
   "author": {
-    "name": "OpenShift",
-    "email": "ramr@example.org",
-    "url": "http://www.openshift.com/"
+    "name": "HaRRiS",
+    "email": "harkon2@gmail.com",
+    "url": "http://www.harkon.tk"
   },
-  "homepage": "http://www.openshift.com/",
+  "contributors": [
+    {}
+  ],
+  "homepage": "http://www.shoppes101.com",
+  "license": "All rights reserved",
   "repository": {
     "type": "git",
     "url": "https://github.com/openshift/origin-server"
   },
-
   "engines": {
-    "node": ">= 0.6.0",
-    "npm": ">= 1.0.0"
+    "node": ">= 0.10.31",
+    "npm": ">= 1.4.0"
   },
-
   "dependencies": {
-    "express": "~3.4.4"
+    "bcrypt-nodejs": "^0.0.3",
+    "body-parser": "~1.6.5",
+    "cloudinary": "^1.0.12",
+    "compression": "^1.0.11",
+    "connect-flash": "^0.1.1",
+    "connect-mongostore": "^0.1.2",
+    "cookie-parser": "^1.3.2",
+    "csurf": "^1.6.0",
+    "express": "^4.x",
+    "express-handlebars": "^1.0.1",
+    "express-session": "^1.7.6",
+    "fb": "^0.7.0",
+    "i18next": "^1.7.4",
+    "method-override": "^2.1.3",
+    "moment": "^2.8.3",
+    "mongodb-uri": "^0.9.7",
+    "mongoose": "^3.8.15",
+    "mongoose-materialized": "^0.1.8",
+    "morgan": "^1.3.0",
+    "multer": "^0.1.6",
+    "passport": "^0.2.0",
+    "passport-facebook": "^1.0.3",
+    "passport-local": "^1.0.0",
+    "qs": "^2.2.4",
+    "serve-static": "^1.7.0",
+    "winston": "^0.7.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "supertest": "^0.14.0",
+    "should": "^4.0.4",
+    "mocha": "^1.21.5",
+    "nodemon": "^1.2.1"
+  },
   "bundleDependencies": [],
-
+  "scripts": {
+    "start": "NODE_ENV=development ./node_modules/.bin/nodemon server.js",
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --reporter spec --timeout 10000 test/test-*.js"
+  },
   "private": true,
   "main": "server.js"
 }

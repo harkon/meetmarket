@@ -1,0 +1,59 @@
+<div id="registerModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h1 class="text-center">Register</h1>
+                <span class="help-block">All fields are required.</span>
+            </div>
+            <div class="modal-body">
+                <form action="/users" method="post" class="form col-md-12 center-block" role="form">
+                    <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+                    <p class="col-sm-offset-2 error">
+                    {{ message }}
+                    </p>
+                    <div class="form-group">
+                        <input id="firstname" class="form-control input-lg" type="text" name="firstname" placeholder="Firstname" value="{{ user.firstname }}">
+                    </div>
+                    <div class="form-group">
+                        <input id="lastname" class="form-control input-lg" type="text" name="lastname" placeholder="Lastname" value="{{ user.lastname }}">
+                    </div>
+                    <div class="form-group">
+                        <input id="company" class="form-control input-lg" type="text" name="company" placeholder="Company(optional)" value="{{ user.company }}">
+                    </div>
+                    <div class="form-group">
+                        <input id="address" class="form-control input-lg" type="text" name="address" placeholder="Street address" value="{{ user.address }}">
+                    </div>
+                    <div class="form-group">
+                        <input id="city" class="form-control input-lg" type="text" name="city" placeholder="City" value="{{ user.city }}">
+                    </div>
+                    <div class="form-group">
+                        <input id="state" class="form-control input-lg" type="text" name="state" placeholder="State or Province" value="{{ user.state }}">
+                    </div>
+                    <div class="form-group">
+                        <input id="zip" class="form-control input-lg" type="text" name="zip" placeholder="Zip or Postal Code" value="{{ user.zip }}">
+                    </div>
+                    <div class="form-group">
+                        <input id="country" class="form-control input-lg" type="text" name="country" placeholder="Country" value="{{ user.country }}">
+                    </div>
+                    <div class="form-group">
+                        <input id="email" class="form-control input-lg" type="text" name="email" placeholder="Email" value="{{ user.email }}">
+                    </div>
+                    <div class="form-group">
+                        <input id="password" class="form-control input-lg" type="password" name="password" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-lg btn-block">Submit</button>
+                        <span><a href="/login">Login</a></span>
+                        <span class="pull-right"><a href="#">&nbsp;</a></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                {{!-- <div class="col-md-12">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                </div> --}}
+            </div>
+        </div>
+    </div>
+</div>

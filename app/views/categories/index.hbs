@@ -1,0 +1,37 @@
+{{> header}}
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-9">
+      <div class="tree well">
+        {{{treeView categories}}}
+      </div>
+    </div>
+    <div class="col-xs-6 col-md-3">
+      <button class="btn btn-primary" data-toggle="modal" data-target="#categoryModal" href="/categories/new">Add category</button>
+    </div>
+  </div>
+</div>
+{{!-- modal --}}
+<div id="categoryModal" class="modal fade product-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(function () {
+    $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Collapse this branch');
+    $('.tree li.parent_li > a').on('click', function (e) {
+        e.preventDefault();
+        var children = $(this).parent('li.parent_li').find(' > ul > li');
+        if (children.is(":visible")) {
+            children.hide('fast');
+            $(this).attr('title', 'Expand this branch').find(' > i').addClass('icon-plus-sign').removeClass('icon-minus-sign');
+        } else {
+            children.show('fast');
+            $(this).attr('title', 'Collapse this branch').find(' > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
+        }
+        e.stopPropagation();
+    });
+});
+</script>

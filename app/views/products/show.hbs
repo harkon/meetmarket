@@ -1,0 +1,112 @@
+{{> header}}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 .col-md-offset-1">
+      <form action="/products" method="post" enctype="multipart/form-data" class="form col-md-12 center-block" role="form">
+        <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+        {{!-- {{#unless product.isNew}}
+        <input type="hidden" name="_method" value="PUT">
+        {{/unless}} --}}
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="active"><a href="#details" role="tab" data-toggle="tab">Details</a></li>
+          <li><a href="#variants" role="tab" data-toggle="tab">Variants</a></li>
+          <li><a href="#images" role="tab" data-toggle="tab">Images</a></li>
+          <li><a href="#categories" role="tab" data-toggle="tab">Categories</a></li>
+          <li><a href="#stock" role="tab" data-toggle="tab">Stock</a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane active" id="details">
+            
+            <div class="form-group">
+              <input type="text" name="name" value="{{ product.name }}" placeholder="Enter the name" class="form-control" id="name">
+            </div>
+            <div class="form-group">
+              <input id="sku" class="form-control input-lg" type="text" name="sku" placeholder="SKU" value="{{ product.sku }}">
+            </div>
+            <div class="form-group">
+              <input id="weight" class="form-control input-lg" type="number" name="shipping[weight]" placeholder="Weight" value="{{ product.shipping.weight }}" min="0" max="5">
+            </div>
+            <div class="form-group">
+              <input id="width" class="form-control input-lg" type="number" name="shipping[dimensions][width]" placeholder="Width" value="{{ product.shipping.dimensions.width }}" min="0" max="5">
+            </div>
+            <div class="form-group">
+              <input id="height" class="form-control input-lg" type="number" name="shipping[dimensions][height]" placeholder="Height" value="{{ product.shipping.dimensions.height }}">
+            </div>
+            <div class="form-group">
+              <input id="length" class="form-control input-lg" type="number" name="shipping[dimensions][length]" placeholder="Length" value="{{ product.shipping.dimensions.length }}">
+            </div>
+            {{! name, sku, weight, price, cost, default image, description, slug, status}}
+            <div class="form-group">
+              <input id="slug" class="form-control input-lg" type="text" name="slug" placeholder="Slug" value="{{ product.slug }}">
+            </div>
+            {{!-- <div class="form-group">
+              <button class="btn btn-primary btn-lg btn-block">Submit</button>
+              <button class="btn btn-primary btn-lg btn-block">Close</button>
+            </div> --}}
+          </form>
+        </div>
+        <div class="tab-pane" id="variants">aa</div>
+        <div class="tab-pane" id="images">aa</div>
+        <div class="tab-pane" id="categories">aa</div>
+        <div class="tab-pane" id="stock">aa</div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      {{!-- <img src="http://thetransformedmale.files.wordpress.com/2011/06/bruce-wayne-armani.jpg"  alt="" class="img-rounded" style="margin:0 auto;display:block;"> --}}
+      {{!-- {{{cloudImage this.public_id 250 250 "crop"}}} --}}
+      <div id="Carousel" class="carousel slide">
+        
+        <ol class="carousel-indicators">
+          <li data-target="#Carousel" data-slide-to="0" class="active"></li>
+          <li data-target="#Carousel" data-slide-to="1"></li>
+          <li data-target="#Carousel" data-slide-to="2"></li>
+        </ol>
+        
+        <!-- Carousel items -->
+        <div class="carousel-inner">
+          
+          <div class="item active">
+            <div class="row">
+              {{#each product.images}}
+              <div class="col-md-3"><a href="{{cloudUrl this.public_id}}" class="thumbnail">{{{cloudImage this.public_id 250 250 "crop"}}}</a></div>
+              {{/each}}
+            </div>
+            <!--.row-->
+          </div>
+          <!--.item-->
+          
+          <div class="item">
+            <div class="row">
+              <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+              <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+              <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+              <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+            </div>
+            <!--.row-->
+          </div>
+          <!--.item-->
+          
+          <div class="item">
+            <div class="row">
+              <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+              <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+              <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+              <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+            </div>
+            <!--.row-->
+          </div>
+          <!--.item-->
+          
+        </div>
+        <!--.carousel-inner-->
+        <a data-slide="prev" href="#Carousel" class="left carousel-control">‹</a>
+        <a data-slide="next" href="#Carousel" class="right carousel-control">›</a>
+      </div>
+      <!--.Carousel-->
+    </div>
+  </div>
+</div>
+</div>
+{{!-- /container --}}

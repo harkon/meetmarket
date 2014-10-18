@@ -1,0 +1,140 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  <h3 class="text-center">Create Product</h3>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="active"><a href="#details" role="tab" data-toggle="tab">Details</a></li>
+    <li><a href="#variants" role="tab" data-toggle="tab">Variants</a></li>
+    <li><a href="#images" role="tab" data-toggle="tab">Images</a></li>
+    <li><a href="#categories" role="tab" data-toggle="tab">Categories</a></li>
+    <li><a href="#stock" role="tab" data-toggle="tab">Stock</a></li>
+  </ul>
+</div>
+<div class="modal-body">
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane active" id="details">
+      <form action="/products" method="post" enctype="multipart/form-data" class="form col-md-12 center-block" role="form" id="productForm">
+        <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+        {{#unless product.isNew}}
+        <input type="hidden" name="_method" value="PUT">
+        {{/unless}}
+        <div class="clearfix"></div>
+        <div class="row">
+          <div class="col-md-7">
+            <div class="form-group">
+              <label class="sr-only" for="nameInput">Name</label>
+              <input id="nameInput" class="form-control" type="text" name="name" placeholder="Name" value="{{ product.name }}">
+            </div>
+            {{!-- <div class="clearfix"></div> --}}
+            <div class="form-group">
+              <label class="sr-only" for="slugInput">Slug</label>
+              <input id="slugInput" class="form-control" type="text" name="slug" placeholder="Slug" value="{{ product.slug }}">
+            </div>
+            {{!-- <div class="clearfix"></div> --}}
+            <div class="form-group">
+              <label class="sr-only" for="skuInput">SKU</label>
+              <input id="skuInput" class="form-control" type="text" name="sku" placeholder="SKU" value="{{ product.sku }}">
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="priceInput">Price</label>
+              <input id="priceInput" class="form-control" type="text" name="price" placeholder="Price" value="{{ product.price }}">
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="form-group field">
+              <label>Default image</label>
+              <div class="image default" data-upload="/upload/products/613">
+                {{!-- <img src="/images/blank.png?1413378831"> --}}
+                <span><em class="name"></em></span>
+                <input type="file" class="upload" name="image" style="top: 80px; left: 63.5px;">
+                {{!-- <input type="hidden" class="uploaded" name="product[images][default]" value=""> --}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--
+        <div class="form-group">
+          <label class="sr-only" for="shortDescInput">Short Desc</label>
+          <input id="shortDescInput" class="form-control input-lg" type="text" name="short_desc" placeholder="Short Description" value="{{ product.short_desc }}">
+        </div>
+        <div class="form-group">
+          <label class="sr-only" for="file">File</label>
+          <input type="file" name="thumbnail" class="form-control" id="file" />
+        </div>
+        -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="sr-only" for="descTextarea">Description</label>
+              <textarea id="descTextarea" class="form-control" rows="3" name="desc" placeholder="Description" value="{{ product.desc }}"></textarea>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Shipping details</h3>
+              </div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <label class="col-sm-4 control-label" for="weightInput">Weigth</label>
+                  <div class="col-sm-8">
+                    <input id="weightInput" type="number" class="form-control" placeholder="Weight" value="{{ product.shipping.weight }}">
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="form-group">
+                  <div class="col-xs-4">
+                    <label for="widthInput">Width</label>
+                    <input type="number" class="form-control" id="widthInput" placeholder="Width" value="{{ product.shipping.dimensions.width }}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-xs-4">
+                    <label for="heightInput">Height</label>
+                    <input type="number" class="form-control" id="heightInput" placeholder="Height" value="{{ product.shipping.dimensions.height }}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-xs-4">
+                    <label for="lengthInput">Length</label>
+                    <input type="number" class="form-control" id="lengthInput" placeholder="Length" value="{{ product.shipping.dimensions.length }}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="tab-pane" id="variants">Here we ll implement the variants form</div>
+    <div class="tab-pane" id="images">Image gallery component</div>
+    <div class="tab-pane" id="categories">
+      <div class="treeview">
+        {{{treeInput categories}}}
+      </div>
+    </div>
+    <div class="tab-pane" id="stock">Inventory</div>
+  </div>
+</div>
+<div class="modal-footer">
+  <div class="form-group">
+    <div class="col-md-12">
+      <button class="btn btn-primary btn-lg" form="productForm">Submit</button>
+      <button class="btn btn-default btn-lg" data-dismiss="modal" aria-hidden="true">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+
+  $('.treeview').on('change', "label input:checkbox", function() {
+    var checkbox = $(this),
+      nestedList = $(this).parent().next().next(),
+      selectNestedListCheckbox = nestedList.find("label:not([for]) input:checkbox");
+
+    if (checkbox.is(":checked")) {
+      return selectNestedListCheckbox.prop("checked", true);
+    }
+    selectNestedListCheckbox.prop("checked", false);
+  });
+</script>

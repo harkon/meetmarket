@@ -1,0 +1,15 @@
+{{!-- {{debrsug this}} --}}
+
+<div class="container">
+  <div class="row">
+    <h2>Category - {{title}}</h2>
+    <div class="col-md-8">
+      <ul class="nav nav-pills nav-justified">
+        {{!-- <li><a href="/users/{{userId}}">Home</a></li> --}}
+        {{#each categories}}
+          <li><a href="/shops/{{../shop._id}}/categories/{{this._id}}">{{this.name}}</a></li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</div>

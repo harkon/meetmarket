@@ -1,0 +1,59 @@
+<div id="createShopModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h1 class="text-center">Create Shop</h1>
+        {{!-- <span class="help-block">All fields are required.</span> --}}
+      </div>
+      <div class="modal-body">
+        <form action="/shops" method="post" enctype="application/json" class="form col-md-12 center-block" role="form">
+          <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+          {{#unless shop.isNew}}
+          <input type="hidden" name="_method" value="PUT">
+          {{/unless}}
+          <div class="form-group">
+            <input id="name" class="form-control input-lg" type="text" name="name" placeholder="Name" value="{{ shop.name }}">
+          </div>
+          <div class="form-group">
+            <input id="addr1" class="form-control input-lg" type="text" name="address[addr1]" placeholder="Address" value="{{ shop.address.addr1 }}">
+          </div>
+          <div class="form-group">
+            <input id="addr2" class="form-control input-lg" type="text" name="address[addr2]" placeholder="Address 2" value="{{ shop.address.addr2 }}">
+          </div>
+          <div class="form-group">
+            <input id="city" class="form-control input-lg" type="text" name="address[city]" placeholder="City" value="{{ shop.address.city }}">
+          </div>
+          <div class="form-group">
+            <input id="state" class="form-control input-lg" type="text" name="address[state]" placeholder="State" value="{{ shop.address.state }}">
+          </div>
+          <div class="form-group">
+            <input id="zip" class="form-control input-lg" type="text" name="address[zip]" placeholder="ZIP" value="{{ shop.address.zip }}">
+          </div>
+          <div class="form-group">
+            <input id="country" class="form-control input-lg" type="text" name="address[country]" placeholder="Country" value="{{ shop.address.country }}">
+          </div>
+          <div class="form-group">
+            <input id="tel" class="form-control input-lg" type="text" name="numbers[tel]" placeholder="Telephone" value="{{ shop.numbers.tel }}">
+          </div>
+          <div class="form-group">
+            <input id="fax" class="form-control input-lg" type="text" name="numbers[fax]" placeholder="Fax" value="{{ shop.numbers.fax }}">
+          </div>
+          <div class="form-group">
+            <input id="mob" class="form-control input-lg" type="text" name="numbers[mob]" placeholder="Mobile" value="{{ shop.numbers.mob }}">
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary btn-lg btn-block">Submit</button>
+            {{!--             <span><a href="/login">Login</a></span>
+            <span class="pull-right"><a href="#">&nbsp;</a></span> --}}
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="col-md-12">
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
