@@ -113,7 +113,7 @@ module.exports = function(app, passport) {
     secret: "secret",
     maxAge: null,
     store: new mongoStore({
-      db: 'shops',
+      db: 'meetmarket',
       collection: 'sessions',
       host: process.env.OPENSHIFT_MONGODB_DB_HOST || '127.0.0.1',
       port: process.env.OPENSHIFT_MONGODB_DB_PORT || '27017',
