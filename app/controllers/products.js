@@ -13,19 +13,12 @@ var extend = require('util')._extend
  */
 
 exports.load = function(req, res, next, id) {
-  // var User = mongoose.model('User');
-  // console.log("shop id:", req.shop.id)
-  // var options = {
-  //   criteria: {
-  //     shop: req.shop.id
-  //   }
-  // };
-  // console.log("shopId", req.session.shopId)
+
   Product.load(id, function(err, product) {
     if (err) return next(err);
     if (!product) return next(new Error('not found'));
     req.product = product;
-    // console.log("product", product)
+    console.log("product", product)
     next();
   });
 };
@@ -39,13 +32,11 @@ exports.index = function(req, res) {
   var perPage = 30;
   var options = {
     perPage: perPage,
-    page: page,
-    // criteria: {
-    //   _shop: req.shop._id
-    // }
+    page: page
   };
 
   Product.list(options, function(err, products) {
+    console.log("#Products", products)
     if (err) return res.render('500');
     Product.count().exec(function(err, count) {
       res.render('products/index', {
@@ -109,7 +100,7 @@ exports.new = function(req, res) {
  */
 
 exports.create = function(req, res) {
-  
+
   var product = new Product(req.body);
   console.log("product", product)
   product.uploadAndSave(req.files.image, function(err) {

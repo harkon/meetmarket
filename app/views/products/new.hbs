@@ -53,16 +53,6 @@
             </div>
           </div>
         </div>
-        <!--
-        <div class="form-group">
-          <label class="sr-only" for="shortDescInput">Short Desc</label>
-          <input id="shortDescInput" class="form-control input-lg" type="text" name="short_desc" placeholder="Short Description" value="{{ product.short_desc }}">
-        </div>
-        <div class="form-group">
-          <label class="sr-only" for="file">File</label>
-          <input type="file" name="thumbnail" class="form-control" id="file" />
-        </div>
-        -->
         <div class="row">
           <div class="col-md-12">
             <div class="form-group">
@@ -77,14 +67,14 @@
                 <div class="form-group">
                   <label class="col-sm-4 control-label" for="weightInput">Weigth</label>
                   <div class="col-sm-8">
-                    <input id="weightInput" type="number" class="form-control" placeholder="Weight" value="{{ product.shipping.weight }}">
+                    <input id="weightInput" type="number" class="form-control" name="shipping[weight]" placeholder="Weight" value="{{ product.shipping.weight }}">
                   </div>
                   <div class="clearfix"></div>
                 </div>
                 <div class="form-group">
                   <div class="col-xs-4">
                     <label for="widthInput">Width</label>
-                    <input type="number" class="form-control" id="widthInput" placeholder="Width" value="{{ product.shipping.dimensions.width }}">
+                    <input id="widthInput" class="form-control" type="number" name="shipping[dimensions][width]" value="{{ product.shipping.dimensions.width }}" placeholder="Width" >
                   </div>
                 </div>
                 <div class="form-group">

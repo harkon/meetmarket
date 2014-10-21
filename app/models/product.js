@@ -12,16 +12,16 @@ var Schema = mongoose.Schema;
  * Getters
  */
 
-var getTags = function(tags) {
-  return tags.join(',');
+var getCategory = function(tags) {
+  return category.join(',');
 };
 
 /**
  * Setters
  */
 
-var setTags = function(tags) {
-  return tags.split(',');
+var setCategory = function(tags) {
+  return category.split(',');
 };
 
 /**
@@ -35,8 +35,9 @@ var ProductSchema = new Schema({
     default: ''
   },
   category: {
-    type: String,
-    default: ''
+    type: [],
+    get: getCategory,
+    set: setCategory
   },
   brand: {
     id: String,
@@ -143,7 +144,7 @@ ProductSchema.path('sku').required(true, 'Item SKU cannot be blank');
 
 // ProductSchema.pre('save', true, function(next, done) {
 //   var self = this;
-  /**
+/**
    * NOTE: middleware to get category names from the input and then save them concatanated to category field
    *
   // calling next kicks off the next middleware in parallel
@@ -287,7 +288,7 @@ ProductSchema.statics = {
       _id: id
     })
       .populate('_shop')
-      .populate('_category', 'name')
+      .populate('_categories', 'name')
       .exec(cb);
   },
 
@@ -304,11 +305,9 @@ ProductSchema.statics = {
 
     this.find(criteria)
       .populate('_shop')
-      .populate('_category', 'path')
-      .sort({
-        'lastModified': -1
-      }) // sort by date
-    .limit(options.perPage)
+      .populate('_categories', 'name')
+      .sort({'sku': -1}) // sort by SKU
+      .limit(options.perPage)
       .skip(options.perPage * options.page)
       .exec(cb);
   }
