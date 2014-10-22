@@ -22,6 +22,12 @@
         <div class="clearfix"></div>
         <div class="row">
           <div class="col-md-7">
+            <!-- #messages is where the messages are placed inside -->
+            <div class="form-group">
+                <div class="col-sm-9 col-sm-offset-3">
+                    <div id="messages"></div>
+                </div>
+            </div>
             <div class="form-group">
               <label class="sr-only" for="nameInput">Name</label>
               <input id="nameInput" class="form-control" type="text" name="name" placeholder="Name" value="{{ product.name }}">
@@ -47,7 +53,7 @@
               <div class="image default" data-upload="/upload/products/613">
                 {{!-- <img src="/images/blank.png?1413378831"> --}}
                 <span><em class="name"></em></span>
-                <input type="file" class="upload" name="image" style="top: 80px; left: 63.5px;">
+                <input type="file" class="upload" name="assets[images[]]" style="top: 80px; left: 63.5px;">
                 {{!-- <input type="hidden" class="uploaded" name="product[images][default]" value=""> --}}
               </div>
             </div>
@@ -80,20 +86,20 @@
                 <div class="form-group">
                   <div class="col-xs-4">
                     <label for="heightInput">Height</label>
-                    <input type="number" class="form-control" id="heightInput" placeholder="Height" value="{{ product.shipping.dimensions.height }}">
+                    <input id="heightInput" class="form-control" type="number" name="shipping[dimensions][height]" placeholder="Height" value="{{ product.shipping.dimensions.height }}">
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-xs-4">
                     <label for="lengthInput">Length</label>
-                    <input type="number" class="form-control" id="lengthInput" placeholder="Length" value="{{ product.shipping.dimensions.length }}">
+                    <input id="lengthInput" class="form-control" type="number" name="shipping[dimensions][length]" placeholder="Length" value="{{ product.shipping.dimensions.length }}">
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </form>
+      {{!-- </form> --}}
     </div>
     <div class="tab-pane" id="variants">Here we ll implement the variants form</div>
     <div class="tab-pane" id="images">Image gallery component</div>
@@ -108,14 +114,17 @@
 <div class="modal-footer">
   <div class="form-group">
     <div class="col-md-12">
-      <button class="btn btn-primary btn-lg" form="productForm">Submit</button>
+      <button class="btn btn-primary btn-lg" type="submit" form="productForm">Submit</button>
       <button class="btn btn-default btn-lg" data-dismiss="modal" aria-hidden="true">Cancel</button>
     </div>
   </div>
+</form>
 </div>
 
 
 <script type="text/javascript">
+
+$(document).ready(function() {
 
   $('.treeview').on('change', "label input:checkbox", function() {
     var checkbox = $(this),
@@ -127,4 +136,49 @@
     }
     selectNestedListCheckbox.prop("checked", false);
   });
+
+  // $('#productForm').bootstrapValidator({
+  //   // excluded: [':disabled', ':hidden', ':not(:visible)'],
+  //   // submitButtons: 'button[type="submit"]',
+  //   feedbackIcons: {
+  //     valid: 'glyphicon glyphicon-ok',
+  //     invalid: 'glyphicon glyphicon-remove',
+  //     validating: 'glyphicon glyphicon-refresh'
+  //   },
+  //   fields: {
+  //     name: {
+  //       validators: {
+  //         notEmpty: {
+  //           message: 'The product name is required and cannot be empty'
+  //         }
+  //       }
+  //     },
+  //     slug: {
+  //       validators: {
+  //         notEmpty: {
+  //           message: 'The slug field is required and must be unique'
+  //         }
+  //       }
+  //     },
+  //     sku: {
+  //       validators: {
+  //         notEmpty: {
+  //           message: 'The SKU field is required and cannot be empty'
+  //         }
+  //       }
+  //     },
+  //     price: {
+  //       validators: {
+  //         notEmpty: {
+  //           message: 'Price is required'
+  //         },
+  //         digits: {
+  //           message: 'Price is not valid'
+  //         }
+  //       }
+  //     }
+  //   }
+  // })
+});
+
 </script>

@@ -36,7 +36,7 @@ exports.index = function(req, res) {
   };
 
   Product.list(options, function(err, products) {
-    console.log("#Products", products)
+    // console.log("#Products", products)
     if (err) return res.render('500');
     Product.count().exec(function(err, count) {
       res.render('products/index', {

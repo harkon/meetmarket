@@ -35,9 +35,8 @@ var ProductSchema = new Schema({
     default: ''
   },
   category: {
-    type: [],
-    get: getCategory,
-    set: setCategory
+    type: String,
+    default: ''
   },
   brand: {
     id: String,
@@ -122,25 +121,15 @@ ProductSchema.path('name').required(true, 'Item name cannot be blank');
 ProductSchema.path('sku').required(true, 'Item SKU cannot be blank');
 
 /**
- * Pre-remove hook
+ * Pre-save hook
  */
 
-// ProductSchema.pre('save', function(next) {
+ProductSchema.pre('save', function(next) {
 
-//   var self = this;
-
-//   mongoose.models["Category"].findOne({
-//     _id: self.username
-//   }, function(err, user) {
-//     if (user) {
-//       self.invalidate("user", "username must be unique");
-//     }
-//     done();
-//   });
-//   next();
-//   console.log("pre save", this)
-//   next()
-// });
+  // console.log("PRE", this)
+  this.category = this._categories.join('/')
+  next()
+});
 
 // ProductSchema.pre('save', true, function(next, done) {
 //   var self = this;
