@@ -141,17 +141,17 @@ module.exports = function(app, passport) {
   
   //multipart/form-data parser
   app.use(multer({
-    dest:'./../../tmp/',
-    inMemory: true,
+    dest:'tmp/',
+    // inMemory: true,
     onParseStart: function() {
       console.log('Form parsing started at: ', new Date())
     },
     onParseEnd: function(req, next) {
       // usage example: custom body parse
-      // req.body = require('qs').parse(req.body);
-      // req.files = require('qs').parse(req.files);
+      req.body = require('qs').parse(req.body);
+      req.files = require('qs').parse(req.files);
       console.log("\n\n\nBODY on END",req.body)
-      console.log("\n\n\nFILES on END",req.files)
+      console.log("\n\n\nFILES on END",req.files) 
       // call the next middleware
       console.log('Form parsing completed at: ', new Date());
       next();

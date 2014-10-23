@@ -175,7 +175,7 @@ ProductSchema.methods = {
 
       if (err) return cb(err);
       // File upload (for promise api)
-      cloudinary.uploader.upload(__dirname + image.path, {
+      cloudinary.uploader.upload( image.path, {
         type: "upload"
       })
         .then(function(img) {
