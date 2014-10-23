@@ -1,5 +1,5 @@
 {
-  "name": "Shop101",
+  "name": "moncom",
   "version": "1.0.0",
   "description": "Online e-commerce platform for all!!!",
   "keywords": [
@@ -14,7 +14,11 @@
     "url": "http://www.harkon.tk"
   },
   "contributors": [
-    {}
+    {
+      "name": "HaRRiS",
+      "email": "harkon2@gmail.com",
+      "url": "http://www.harkon.tk"
+    }
   ],
   "homepage": "http://www.shoppes101.com",
   "license": "All rights reserved",
@@ -27,6 +31,7 @@
     "npm": ">= 1.4.0"
   },
   "dependencies": {
+    "async": "^0.9.0",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "~1.6.5",
     "cloudinary": "^1.0.12",
@@ -45,7 +50,7 @@
     "mongodb-uri": "^0.9.7",
     "mongoose": "^3.8.15",
     "mongoose-materialized": "^0.1.8",
-    "morgan": "^1.3.0",
+    "morgan": "^1.4.1",
     "multer": "^0.1.6",
     "passport": "^0.2.0",
     "passport-facebook": "^1.0.3",

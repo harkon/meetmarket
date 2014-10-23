@@ -100,9 +100,11 @@ exports.new = function(req, res) {
  */
 
 exports.create = function(req, res) {
-
+  console.log("\n\nbody", req.body)
+  console.log("\n\nfiles", req.files)
+  
   var product = new Product(req.body);
-  console.log("product", product)
+
   product.uploadAndSave(req.files.image, function(err) {
     if (!err) {
       req.flash('success', 'Successfully created product!');

@@ -5,7 +5,6 @@
 var express = require('express');
 var session = require('express-session');
 var compression = require('compression');
-var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
@@ -15,6 +14,7 @@ var serveStatic = require('serve-static');
 
 var mongoStore = require('connect-mongostore')(session);
 var flash = require('connect-flash');
+var morgan = require('morgan');
 var winston = require('winston');
 var config = require('./config');
 
@@ -141,14 +141,15 @@ module.exports = function(app, passport) {
   
   //multipart/form-data parser
   app.use(multer({
+    dest:'./../../tmp/',
     inMemory: true,
     onParseStart: function() {
       console.log('Form parsing started at: ', new Date())
     },
     onParseEnd: function(req, next) {
       // usage example: custom body parse
-      req.body = require('qs').parse(req.body);
-      req.files = require('qs').parse(req.files);
+      // req.body = require('qs').parse(req.body);
+      // req.files = require('qs').parse(req.files);
       console.log("\n\n\nBODY on END",req.body)
       console.log("\n\n\nFILES on END",req.files)
       // call the next middleware

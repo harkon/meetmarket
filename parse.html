@@ -13,43 +13,45 @@
 <script type="text/javascript">
 var obj = {};
 var regex = /[\[\]]/i;
-$("input").each(function(){
-var fieldname=this.name;
-var val = this.value;
-var data = fieldname.split(regex)
-console.log(data);
-add(data, val)
+
+$("input").each(function() {
+    var fieldname = this.name;
+    var val = this.value;
+    var data = fieldname.split(regex)
+    console.log(data);
+    add(data, val)
 })
-function add(key, val){
-if (key.length == 1 ) {
-obj[key[0]] = val
-return;
-}
-//console.log("--",key[0])
-if(key[0] == "" ) {
-//console.log(key[1])
-if (!obj[key[1]]) obj[key[1]] = [];
-obj[key[1]].push(val)
-//return;
-}else{
-key.reduce(function(previousValue, currentValue, index, array) {
-console.log( previousValue , currentValue, index);
-if(previousValue){
-if(!obj[previousValue]) obj[previousValue] = {};
-return obj[previousValue];
-}
-});
-key.forEach(function(k){
-//console.log("key",k)
-//key[k].forEach(function(l){
-//    console.log("nested key", l)
-//})
-})
-for(var i=0; i < key.length;i++){
-obj.hasOwnProperty(key[i]);
-}
-}
-return;
+
+function add(key, val) {
+    if (key.length == 1) {
+        obj[key[0]] = val
+        return;
+    }
+    //console.log("--",key[0])
+    if (key[0] == "") {
+        //console.log(key[1])
+        if (!obj[key[1]]) obj[key[1]] = [];
+        obj[key[1]].push(val)
+        //return;
+    } else {
+        key.reduce(function(previousValue, currentValue, index, array) {
+            console.log(previousValue, currentValue, index);
+            if (previousValue) {
+                if (!obj[previousValue]) obj[previousValue] = {};
+                return obj[previousValue];
+            }
+        });
+        key.forEach(function(k) {
+            //console.log("key",k)
+            //key[k].forEach(function(l){
+            //    console.log("nested key", l)
+            //})
+        })
+        for (var i = 0; i < key.length; i++) {
+            obj.hasOwnProperty(key[i]);
+        }
+    }
+    return;
 }
 console.log(obj)
 </script>
