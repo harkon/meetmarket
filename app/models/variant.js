@@ -38,6 +38,10 @@ var VariantSchema = new Schema({
     type: String,
     default: ''
   },
+  productId: {
+    type: String,
+    default: ''
+  },
   assets: {
     images: []
   },

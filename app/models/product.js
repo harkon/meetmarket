@@ -49,6 +49,11 @@ var ProductSchema = new Schema({
     default: '',
     trim: true
   },
+  lname: {
+    type: String,
+    default: '',
+    trim: true
+  },
   sku: {
     type: String,
     default: ''
@@ -125,6 +130,7 @@ ProductSchema.pre('save', function(next) {
   var calls = [];
 
   self.category = self._categories.join('/');
+  self.lname = self.name.toLowerCase();
 
   self._categories.forEach(function(id) {
 
@@ -144,7 +150,7 @@ ProductSchema.pre('save', function(next) {
        when any of the calls passes an error */
     if (err) return next(err);
     result.forEach(function(category) {
-      if (category.parentId === null) self.department = category.name;
+      if (category.parentId === null) self.department = category._id;
     })
     next(null, result)
   });

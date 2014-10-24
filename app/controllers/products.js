@@ -100,8 +100,8 @@ exports.new = function(req, res) {
  */
 
 exports.create = function(req, res) {
-  console.log("\n\nbody", req.body)
-  console.log("\n\nfiles", req.files)
+  // console.log("\n\nbody", req.body)
+  console.log("\n\nfiles", req.files.image)
   
   var product = new Product(req.body);
 

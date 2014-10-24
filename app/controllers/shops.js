@@ -83,26 +83,12 @@ exports.create = function(req, res) {
       });
     }
     
-    // console.log("req user", user);
     user._shops.push(shop);
     user.save();
     // console.log("New Shop", shop)
     req.flash('success', 'Successfully created shop!');
     return res.redirect('/shops/' + shop.id);
   });
-  // console.log("files", req.files)
-  // shop.uploadAndSave(req.files.image, function (err) {
-  //   if (!err) {
-  //     req.flash('success', 'Successfully created shop!');
-  //     return res.redirect('/shops/'+shop._id);
-  //   }
-
-  //   res.render('shops/new', {
-  //     title: 'New Shop',
-  //     shop: shop,
-  //     error: utils.errors(err.errors || err)
-  //   });
-  // });
 };
 
 /**
