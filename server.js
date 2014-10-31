@@ -9,6 +9,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var uriUtil = require('mongodb-uri');
+var autoIncrement = require('mongoose-auto-increment');
 
 // ENV variables
 var env = process.env.NODE_ENV || 'development';
@@ -48,6 +49,8 @@ connect();
 
 mongoose.connection.on('error', console.log);
 mongoose.connection.on('disconnected', connect);
+
+autoIncrement.initialize(mongoose.connection);
 
 // Bootstrap models
 fs.readdirSync(__dirname + '/app/models').forEach(function(file) {

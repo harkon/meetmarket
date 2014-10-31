@@ -81,9 +81,9 @@ var UserSchema = new Schema({
 	},
 	facebook: {},
 	google: {},
-	_shops: [{
-		type: Schema.ObjectId,
-		ref: 'Shop'
+	_stores: [{
+		type: Number,
+		ref: 'Store'
 	}]
 });
 
@@ -250,9 +250,9 @@ UserSchema.statics = {
 
 	load: function(options, cb) {
 		// console.log("user load", options)
-		options.select = options.select || 'firstname lastname';
+		// options.select = options.select || 'firstname lastname _stores';
 		this.findOne(options.criteria)
-			.populate('_shops')
+			.populate('_stores')
 			// .select(options.select)
 			.exec(cb);
 	}

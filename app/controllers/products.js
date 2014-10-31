@@ -113,7 +113,6 @@ exports.create = function(req, res) {
 
     res.render('500', {
       title: 'New Product',
-      product: product,
       error: utils.errors(err.errors || err)
     });
 

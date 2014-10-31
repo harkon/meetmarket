@@ -3,7 +3,7 @@
  */
 
 var users = require('../app/controllers/users');
-var shops = require('../app/controllers/shops');
+var stores = require('../app/controllers/stores');
 var categories = require('../app/controllers/categories');
 var products = require('../app/controllers/products');
 var orders = require('../app/controllers/orders');
@@ -13,7 +13,7 @@ var auth = require('./middlewares/authorization');
  * Route middlewares
  */
 
-var shopAuth = [auth.requiresLogin, auth.shop.hasAuthorization];
+var storeAuth = [auth.requiresLogin, auth.store.hasAuthorization];
 var categoryAuth = [auth.requiresLogin, auth.category.hasAuthorization];
 
 /**
@@ -25,9 +25,9 @@ module.exports = function(app, passport) {
   // home route
   app.get('/', auth.requiresLogin, function(req, res) {
 
-    if (req.user._shops.length === 1) {
+    if (req.user._stores.length === 1) {
       // go to shop page
-      res.redirect('/shops/' + req.user._shops[0]);
+      res.redirect('/stores/' + req.user._stores[0]);
     } else {
       // render user dashboard
       res.render('index', {
@@ -59,14 +59,14 @@ module.exports = function(app, passport) {
     }), users.authCallback);
 
   // shop routes
-  app.param('id', shops.load);
-  app.get('/shops', auth.requiresLogin, shops.index);
-  app.get('/shops/new', auth.requiresLogin, shops.new);
-  app.post('/shops', auth.requiresLogin, shops.create);
-  app.get('/shops/:id', shopAuth, shops.show);
-  app.get('/shops/:id/edit', shopAuth, shops.edit);
-  app.put('/shops/:id', shopAuth, shops.update);
-  app.delete('/shops/:id', shopAuth, shops.destroy);
+  app.param('storeId', stores.load);
+  app.get('/stores', auth.requiresLogin, stores.index);
+  app.get('/stores/new', auth.requiresLogin, stores.new);
+  app.post('/stores', auth.requiresLogin, stores.create);
+  app.get('/stores/:storeId', storeAuth, stores.show);
+  app.get('/stores/:storeId/edit', storeAuth, stores.edit);
+  app.put('/stores/:storeId', storeAuth, stores.update);
+  app.delete('/stores/:storeId', storeAuth, stores.destroy);
 
   // categories routes
   app.param('categoryId', categories.load);

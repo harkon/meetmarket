@@ -17,7 +17,7 @@
     <!--/col-3-->
     <div class="col-sm-9">
       <ul class="nav nav-tabs" id="myTab">
-        <li class="active"><a href="#home" data-toggle="tab">Shops</a></li>
+        <li class="active"><a href="#home" data-toggle="tab">Stores</a></li>
         <li><a href="#messages" data-toggle="tab">Messages</a></li>
         <li><a href="#settings" data-toggle="tab">Settings</a></li>
       </ul>
@@ -36,15 +36,15 @@
                   <th>Open </th>
                 </tr>
               </thead>
-              <tbody id="shops">
-                {{#each user._shops}}
+              <tbody id="stores">
+                {{#each user._stores}}
                 <tr data-shop="{{_id}}">
                   <td>{{add @index 1}}</td>
                   <td>{{name}}</td>
                   <td>{{address.addr1}}</td>
                   <td>{{address.city}}</td>
                   <td>{{address.country}}</td>
-                  <td>{{contact.tel}}</td>
+                  <td>{{numbers.tel}}</td>
                   <td>{{available}}</td>
                 </tr>
                 {{/each}}
@@ -143,9 +143,9 @@
 (function(){
 function clickHandler(){
 // console.log("clicked", window.location);
-window.location.href = window.location.origin + '/shops/' + this.getAttribute("data-shop");
+window.location.href = window.location.origin + '/stores/' + this.getAttribute("data-shop");
 }
-var table = document.getElementById('shops');
+var table = document.getElementById('stores');
 var rows = table.getElementsByTagName('tr');
 for(i=0; i < rows.length; i++) {
 rows[i].addEventListener('click', clickHandler, false);

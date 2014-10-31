@@ -27,12 +27,11 @@ exports.user = {
  *  Shop authorization routing middleware
  */
 
-exports.shop = {
+exports.store = {
   hasAuthorization: function(req, res, next) {
-    // console.log("\nsession", req.session.shopId,"Obj",req.shop.id)
-    if (req.session.shopId != req.shop.id) {
+    if (req.session.storeId != req.store._id) {
       req.flash('info', 'You are not authorized')
-      return res.redirect('/shops/')
+      return res.redirect('/stores/')
     }
     next()
   }
@@ -50,5 +49,6 @@ exports.category = {
     //   req.flash('info', 'You are not authorized')
     //   res.redirect('/articles/' + req.article.id)
     // }
+    next();
   }
 }

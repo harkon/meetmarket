@@ -51,19 +51,20 @@ var ProductSchema = new Schema({
   },
   lname: {
     type: String,
-    default: '',
-    trim: true
-  },
-  sku: {
-    type: String,
-    default: ''
-  },
-  slug: {
-    type: String,
     lowercase: true,
     trim: true,
     default: ''
   },
+  // sku: {
+  //   type: String,
+  //   default: ''
+  // },
+  // slug: {
+  //   type: String,
+  //   lowercase: true,
+  //   trim: true,
+  //   default: ''
+  // },
   desc: {
     type: String,
     default: '',
@@ -98,9 +99,9 @@ var ProductSchema = new Schema({
     default: Date.now
   },
   // foreign keys
-  _shop: {
+  _store: {
     type: Schema.ObjectId,
-    ref: 'Shop'
+    ref: 'Store'
   },
   _variants: {
     type: Schema.ObjectId,
@@ -118,7 +119,7 @@ var ProductSchema = new Schema({
  */
 
 ProductSchema.path('name').required(true, 'Item name cannot be blank');
-ProductSchema.path('sku').required(true, 'Item SKU cannot be blank');
+// ProductSchema.path('sku').required(true, 'Item SKU cannot be blank');
 
 /**
  * Pre-save hook
@@ -129,7 +130,7 @@ ProductSchema.pre('save', function(next) {
   var self = this;
   var calls = [];
 
-  self.category = self._categories.join('/');
+  self.category = "/" + self._categories.join('/');
   self.lname = self.name.toLowerCase();
 
   self._categories.forEach(function(id) {
@@ -266,7 +267,7 @@ ProductSchema.statics = {
     this.findOne({
       _id: id
     })
-      .populate('_shop')
+      .populate('_store')
       .populate('_categories', 'name')
       .exec(cb);
   },
@@ -283,10 +284,10 @@ ProductSchema.statics = {
     var criteria = options.criteria || {}
 
     this.find(criteria)
-      .populate('_shop')
+      .populate('_store')
       .populate('_categories', 'name')
       .sort({
-        'sku': -1
+        'name': -1
       }) // sort by SKU
     .limit(options.perPage)
       .skip(options.perPage * options.page)
