@@ -35,8 +35,8 @@ var connect = function() {
 	};
 	var mongodbUri = config.db;
 
-	if (process.env.OPENSHIFT_APP_NAME == 'shops') {
-		mongodbUri = process.env.OPENSHIFT_MONGODB_DB_URL + 'shops';
+	if (process.env.OPENSHIFT_APP_NAME == 'meetmarket') {
+		mongodbUri = process.env.OPENSHIFT_MONGODB_DB_URL + 'meetmarket';
 	} else {
 		mongodbUri = 'mongodb://admin:admin12345@localhost:27017/shops';
 	}
