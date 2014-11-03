@@ -65,7 +65,7 @@ exports.show = function(req, res) {
  */
 
 var login = function(req, res) {
-  var redirectTo = req.session.returnTo ? req.session.returnTo : '/users/' + req.user.id;
+  var redirectTo = req.session.returnTo ? req.session.returnTo : '/';
   delete req.session.returnTo;
   res.redirect(redirectTo);
 };

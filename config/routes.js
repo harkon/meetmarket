@@ -24,16 +24,7 @@ module.exports = function(app, passport) {
 
   // home route
   app.get('/', auth.requiresLogin, function(req, res) {
-
-    if (req.user._stores.length === 1) {
-      // go to shop page
-      res.redirect('/stores/' + req.user._stores[0]);
-    } else {
-      // render user dashboard
-      res.render('index', {
-        user: req.user
-      })
-    }
+    res.redirect('/stores/');
   });
 
   // user routes

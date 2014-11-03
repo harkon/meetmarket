@@ -38,7 +38,7 @@ var connect = function() {
 	if (process.env.OPENSHIFT_APP_NAME == 'meetmarket') {
 		mongodbUri = process.env.OPENSHIFT_MONGODB_DB_URL + 'meetmarket';
 	} else {
-		mongodbUri = 'mongodb://admin:admin12345@localhost:27017/shops';
+		mongodbUri = 'mongodb://localhost:27017/meetmarket';
 	}
 	var mongooseUri = uriUtil.formatMongoose(mongodbUri);
 	mongoose.connect(mongooseUri, options);
