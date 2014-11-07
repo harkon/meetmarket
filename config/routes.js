@@ -24,7 +24,8 @@ module.exports = function(app, passport) {
 
   // home route
   app.get('/', auth.requiresLogin, function(req, res) {
-    res.redirect('/stores/');
+    // res.redirect('/stores/');
+    res.render('index')
   });
 
   // user routes
