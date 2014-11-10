@@ -69,17 +69,8 @@ CategorySchema.statics = {
 	list: function(options, cb) {
 		var criteria = options.criteria || {}
 		this.find(criteria)
-		// .populate('shop', '_id')
 		.sort({'name':1})
 		.exec(cb)
-
-		// this.find(criteria)
-		//   .sort({
-		//     'createdAt': -1
-		//   }) // sort by date
-		// .limit(options.perPage)
-		//   .skip(options.perPage * options.page)
-		//   .exec(cb);
 	},
 	listDept: function(options, cb) {
 		var criteria = options.criteria || {
@@ -95,7 +86,7 @@ CategorySchema.statics = {
 }
 
 /**
- * BUG: This should be declared at the end of the object, before all the static methods
+ * NOTE: This should be declared at the end of the object, after all the static methods
  */
 
 CategorySchema.plugin(tree, {

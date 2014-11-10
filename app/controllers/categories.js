@@ -6,6 +6,7 @@ var mongoose = require('mongoose')
 var Category = mongoose.model('Category')
 var utils = require('../../lib/utils')
 var extend = require('util')._extend
+var async = require('async')
 
 /**
  * Load
@@ -17,48 +18,48 @@ exports.load = function(req, res, next, id) {
 			// shopId: req.shop._id
 		}
 	};
-	Category.findOne({
-		_id: id
-	}, function(err, category) {
-		console.log("Category found", category.name)
-		// access to the children
-		category.getChildren(function(err, children) {
-			console.log("Children", children)
-		});
-		// access to the siblings
-		category.getSiblings(function(err, siblings) {
-			console.log("Siblings", siblings)
-		});
-		// access to the ancestors
-		category.getAncestors(function(err, ancestors) {
-			console.log("Ancestors", ancestors)
-			// ...
-		});
+	// Category.findOne({
+	// 	_id: id
+	// }, function(err, category) {
+	// 	console.log("Category found", category.name)
+	// 	// access to the children
+	// 	category.getChildren(function(err, children) {
+	// 		console.log("Children", children)
+	// 	});
+	// 	// access to the siblings
+	// 	category.getSiblings(function(err, siblings) {
+	// 		console.log("Siblings", siblings)
+	// 	});
+	// 	// access to the ancestors
+	// 	category.getAncestors(function(err, ancestors) {
+	// 		console.log("Ancestors", ancestors)
+	// 		// ...
+	// 	});
 
-		category.getArrayTree(function(err, tree) {
-			// ... [ {"_id": "...", "children": [ {...} ]}]
-			console.log("array tree", tree)
-		});
-		// // get doc tree
-		category.getTree(function(err, tree) {
-			// ... { "doc ID": { ..., children: { ... } }
-			console.log("tree", tree)
-		});
+	// 	category.getArrayTree(function(err, tree) {
+	// 		// ... [ {"_id": "...", "children": [ {...} ]}]
+	// 		console.log("array tree", tree)
+	// 	});
+	// 	// // get doc tree
+	// 	category.getTree(function(err, tree) {
+	// 		// ... { "doc ID": { ..., children: { ... } }
+	// 		console.log("tree", tree)
+	// 	});
 
-		// check element is root
-		console.log("is root", category.isRoot())
+	// 	// check element is root
+	// 	console.log("is root", category.isRoot())
 
-		// check element is leaf
-		console.log("is leaf", category.isLeaf());
+	// 	// check element is leaf
+	// 	console.log("is leaf", category.isLeaf());
 
-		// depth virtual attributes
-		console.log("depth", category.depth)
+	// 	// depth virtual attributes
+	// 	console.log("depth", category.depth)
 
-		// category.getArrayTree(function(err, tree) {
-		// 	console.log("TT", tree)
-		// });
+	// 	// category.getArrayTree(function(err, tree) {
+	// 	// 	console.log("TT", tree)
+	// 	// });
 
-	});
+	// });
 
 
 	Category.load(id, function(err, category) {
@@ -76,41 +77,43 @@ exports.load = function(req, res, next, id) {
  */
 
 exports.index = function(req, res) {
-	// console.log("shop?", req.shop)
+
 	var page = (req.param('page') > 0 ? req.param('page') : 1) - 1;
 	var perPage = 30;
 	var options = {
 		perPage: perPage,
 		page: page,
-		// criteria: {
-		// 	shopId: req.shop._id
-		// }
+		criteria: {
+			parentId: null
+		}
 	};
 
-	Category.listDept(options, function(err, categories) {
-		// console.log("categories", categories)
+	Category.list(options, function(err, categories) {
+		if (err) return res.render('500');
 		var trees = [];
 
-		if (err) return res.render('500');
-		// if there are no categories set, go to render
-		if (categories.length === 0) render(trees);
-
 		categories.forEach(function(category) {
-			var promise = category.getArrayTree();
-			promise.onFulfill(render)
-		})
-
-		function render(data) {
-
-			if (data.length > 0) trees.push(data[0]);
-			if (trees.length === categories.length) {
-				res.render('categories/index', {
-					title: 'Categories',
-					user: req.user,
-					categories: trees,
+			trees.push(function(callback) {
+				category.getArrayTree(function(err, tree) {
+					if(err) callback(err)
+					callback(null, tree[0])
 				});
-			}
-		}
+			});
+
+		});
+		async.parallel(trees, function(err, results) {
+			/* this code will run after all calls finished the job or when any of the calls passes an error */
+			if (err) return res.render('500', {
+				error: err
+			});
+			res.render('categories/index', {
+				title: 'Categories',
+				user: req.user,
+				categories: results,
+			});
+
+		});
+
 	});
 };
 
@@ -134,7 +137,6 @@ exports.new = function(req, res) {
 			layout: false
 		});
 	})
-	// console.log("categories",available)
 };
 
 /**
@@ -155,21 +157,8 @@ exports.create = function(req, res) {
 		}
 		console.log("Category created", category)
 		req.flash('success', 'Successfully created category!');
-		return res.redirect('/categories/index');
+		return res.redirect('/categories');
 	});
-	// console.log("files", req.files)
-	// shop.uploadAndSave(req.files.image, function (err) {
-	//   if (!err) {
-	//     req.flash('success', 'Successfully created shop!');
-	//     return res.redirect('/shops/'+shop._id);
-	//   }
-
-	//   res.render('shops/new', {
-	//     title: 'New Category',
-	//     shop: shop,
-	//     error: utils.errors(err.errors || err)
-	//   });
-	// });
 };
 
 /**
