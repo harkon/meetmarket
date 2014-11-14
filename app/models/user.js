@@ -104,19 +104,9 @@ UserSchema
 
 UserSchema
 	.virtual('fullname')
-	.set(function(fullName) {
-		this._fullname = fullname;
-		if (fullName.indexOf(' ') !== -1) {
-			var segments = fullName.split(' ');
-			this.firstname = segments[0];
-			this.lastname = segments[1];
-		} else {
-			this.firstname = fullName;
-		}
+	.get(function () {
+	  return this.firstname + ' ' + this.lastname;
 	})
-	.get(function() {
-		return this._fullname;
-	});
 
 /**
  * Validations
