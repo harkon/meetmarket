@@ -3,7 +3,7 @@
  */
 
 module.exports = {
-  db: 'mongodb://admin:admin12345@localhost:27017/shops',
+  db: "mongodb://localhost:27017/meetmarket",
   facebook: {
     clientID: "1458988301053397",
     clientSecret: "b7292741b1599d17d35a9c67b3d8e83c",

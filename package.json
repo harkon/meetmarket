@@ -1,26 +1,29 @@
 {
-  "name": "moncom",
+  "name": "meetmarket",
   "version": "1.0.0",
-  "description": "Online e-commerce platform for all!!!",
+  "description": "Online marketplace for crafters!!!",
   "keywords": [
+    "Meetmarket",
     "Facebook",
-    "Ordering system",
-    "E-Shop",
-    "Point Of Sales"
+    "iOS",
+    "Android",
+    "E-commerce",
+    "Cloud",
+    "Marketplace"
   ],
   "author": {
     "name": "HaRRiS",
     "email": "harkon2@gmail.com",
-    "url": "http://www.harkon.tk"
+    "url": "xxxxxx"
   },
   "contributors": [
     {
       "name": "HaRRiS",
       "email": "harkon2@gmail.com",
-      "url": "http://www.harkon.tk"
+      "url": "xxxxxx"
     }
   ],
-  "homepage": "http://www.shoppes101.com",
+  "homepage": "xxxxxx",
   "license": "All rights reserved",
   "repository": {
     "type": "git",
@@ -61,10 +64,14 @@
     "winston": "^0.7.3"
   },
   "devDependencies": {
-    "supertest": "^0.14.0",
-    "should": "^4.0.4",
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-contrib-nodeunit": "^0.4.1",
+    "grunt-contrib-uglify": "^0.8.0",
     "mocha": "^1.21.5",
-    "nodemon": "^1.2.1"
+    "nodemon": "^1.2.1",
+    "should": "^4.0.4",
+    "supertest": "^0.14.0"
   },
   "bundleDependencies": [],
   "scripts": {
